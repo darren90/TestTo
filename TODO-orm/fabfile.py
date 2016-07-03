@@ -1,6 +1,6 @@
 from  fabric.api import *
 
-env.hosts = ['120.24.240.199']
+env.hosts = ['121.42.203.41']
 env.user = 'root'
 env.password = '@Tengfei05'
 
