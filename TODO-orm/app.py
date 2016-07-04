@@ -13,7 +13,7 @@ def index():
 
 @app.route('/test')
 def test():
-    return "Hello tengfei"
+    return "Hello da feige"
 
 @app.route('/add',methods=['POST'])
 def add():
