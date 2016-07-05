@@ -10,20 +10,18 @@ def index():
 def test():
     return "Hello da feige"
 
-@app.route('/add',methods=['POST'])
-def add():
-
-    form = request.form
-    content = form.get('content')
-    id = form.get('id')
-    user = User(id,content)
-    user.save()
-    return jsonify(status="success")
+# @app.route('/add',methods=['POST'])
+# def add():
+#     form = request.form
+#     content = form.get('content')
+#     id = form.get('id')
+#     user = User(id,content)
+#     user.save()
+#     return jsonify(status="success")
 
 @app.route('/delte/<string:todo_id>')
 def delete(todo_id):
     pass
-
 
 @app.route('/update',methods=['POST'])
 def update():
@@ -32,14 +30,13 @@ def update():
 
 @app.route('/list')
 def list():
-    users = User.query_all()
-    return  jsonify(status="success",users=[user.to_json() for user in users])
+    carbs = CalBeatiful.query_all()
+    return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
 
 @app.route('/query/<page>/<count>')
 def query(page,count):
-    users = User.query(page,count)
-    return  jsonify(status="success",users=[user.to_json() for user in users])
-
+    carbs = CalBeatiful.query(page,count)
+    return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
 
 
 if __name__ == '__main__':
