@@ -9,7 +9,7 @@ def hello():
     print "hello fabric"
 
 def deploy():
-    with cd('/home/tengfei/api01/test/TestTo'):
+    with cd('/home/tengfeia a/TestTo'):
         run('git pull')
         sudo('supervisorctl restart todo')
         sudo('supervisorctl status')

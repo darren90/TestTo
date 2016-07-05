@@ -7,3 +7,4 @@ request
 Werkzeug
 itsdangerous
 click
+gunicorn
