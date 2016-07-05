@@ -10,6 +10,9 @@ def hello():
 
 def deploy():
     with cd('/home/tengfei/TestTo'):
+        # run('git pull')
+        run('git fetch --all')
+        run('git reset --hard origin/master ')
         run('git pull')
         sudo('supervisorctl restart autohome')
         sudo('supervisorctl status')
