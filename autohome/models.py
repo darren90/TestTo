@@ -124,7 +124,40 @@ class CalBeatiful(object):
         rows = cursor.fetchall()
         carbs = []
         for row in rows:
-            print  row
+            carb = CalBeatiful(row[0], row[1],row[2], row[3],row[4], row[5],row[6])
+            carbs.append(carb)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return carbs
+
+    @staticmethod
+    def title_search(keyword):
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "SELECT title, detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url from CalBeatiful where title like \'%%%s%%\' " % (keyword)
+
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        carbs = []
+        for row in rows:
+            carb = CalBeatiful(row[0], row[1],row[2], row[3],row[4], row[5],row[6])
+            carbs.append(carb)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return carbs
+
+    @staticmethod
+    def bbsname_search(keyword):
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "SELECT title, detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url from CalBeatiful where bbs_name like \'%%%s%%\' " % (keyword)
+
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        carbs = []
+        for row in rows:
             carb = CalBeatiful(row[0], row[1],row[2], row[3],row[4], row[5],row[6])
             carbs.append(carb)
         conn.commit()

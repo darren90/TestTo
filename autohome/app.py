@@ -1,3 +1,4 @@
+#-*- coding: UTF-8 -*-
 from  flask import Flask,render_template,request,jsonify
 from models import  *
 app = Flask(__name__)
@@ -36,6 +37,18 @@ def list():
 @app.route('/query/<page>/<count>')
 def query(page,count):
     carbs = CalBeatiful.query(page,count)
+    return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
+
+#搜索 - 标题
+@app.route('/title/search/<keyword>/')
+def title_search(keyword):
+    carbs = CalBeatiful.title_search(keyword)
+    return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
+
+#搜索 - bbs的名字
+@app.route('/bbsname/search/<keyword>/')
+def bbsname_search(keyword):
+    carbs = CalBeatiful.bbsname_search(keyword)
     return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
 
 
