@@ -5,11 +5,14 @@ import requests
 import re
 import urlparse
 from models import User
+from models import Spiderdb
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
 import time
 import os
+import hashlib
+
 
 import sys
 reload(sys)
@@ -22,7 +25,10 @@ class spider(object):
 #getsource用来获取网页源代码
     def getsource(self,url):
         response = requests.get(url)
-        response.encoding = 'gb2312'
+        print 'jeixi'
+        # response.encoding = 'gb2312'
+        md5 = hashlib.md5(url).hexdigest()
+        print 'url1:%s,md5,,%s' % (url, md5)
         return response.text
 
 #changepage用来生产不同页数的链接
@@ -40,7 +46,19 @@ class spider(object):
 
 
 #解析具体的数据
-    def parse_html_data(self,html_countent):
+    def parse_html_data(self,html_countent,url):
+
+    # 都不为空的时候，存储爬取的链接
+     isHadSpider = Spiderdb.isThisHadSpider(url,html_countent)
+     print '---url:%s,hadSpider:%d'%(url,isHadSpider)
+     if isHadSpider == True:
+         print '地址：%s 已经爬取，并且内容没有更新'%url
+         return
+     else:
+        print '地址：%s 没有爬取' % url
+        Spiderdb.saveSpider(url,html_countent)
+        
+
      res_array = []
      res_data = {}
      soup = BeautifulSoup(html_countent, "html.parser",from_encoding='gb2312')
@@ -48,6 +66,7 @@ class spider(object):
 
      if links is None:
         return []
+
      for link in links.find_all('li'):
         new_link = link.find('a')
 
@@ -75,7 +94,7 @@ class spider(object):
         bbs_url = urlparse.urljoin("http://club.autohome.com.cn",bbs__['href'])
 
         user = User(title,detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url)
-        # user.save()
+        user.save()
 
 def runapp():
     print('Tick1! The time is: %s' % datetime.now()) 
@@ -90,7 +109,7 @@ def runapp():
         print link
         try:
             html = mySpider.getsource(link)
-            mySpider.parse_html_data(html)
+            mySpider.parse_html_data(html,link)
             count = count +1
         except Exception as e:
             if fialCount == 10200:
@@ -102,14 +121,15 @@ def runapp():
 
 # 配置爬虫，每10个小时爬一次
 if __name__ == '__main__':
-    scheduler = BlockingScheduler()
-    # scheduler.add_job(runapp,'cron', second='*/12', hour='*') 
-    scheduler.add_job(runapp,'cron', hour='*/10') 
-    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
-    try:
-        scheduler.start()
-    except (KeyboardInterrupt, SystemExit):
-        scheduler.shutdown()    
+    runapp()
+    # scheduler = BlockingScheduler()
+    # # scheduler.add_job(runapp,'cron', second='*/12', hour='*') 
+    # scheduler.add_job(runapp,'cron',second='*/3', hour='*') 
+    # print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+    # try:
+    #     scheduler.start()
+    # except (KeyboardInterrupt, SystemExit):
+    #     scheduler.shutdown()    
 
 
 
