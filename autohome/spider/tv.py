@@ -6,6 +6,11 @@ import re
 import urlparse
 from models import User
 
+from apscheduler.schedulers.blocking import BlockingScheduler
+from datetime import datetime
+import time
+import os
+
 import sys
 reload(sys)
 sys.setdefaultencoding("gb2312")
@@ -72,7 +77,8 @@ class spider(object):
         user = User(title,detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url)
         # user.save()
 
-if __name__ == '__main__':
+def runapp():
+    print('Tick1! The time is: %s' % datetime.now()) 
     fialCount = 1
     count = 1
     classinfo = []
@@ -92,6 +98,18 @@ if __name__ == '__main__':
                 break
             fialCount = fialCount + 1
             count = count +1
+
+
+# 配置爬虫，每10个小时爬一次
+if __name__ == '__main__':
+    scheduler = BlockingScheduler()
+    # scheduler.add_job(runapp,'cron', second='*/12', hour='*') 
+    scheduler.add_job(runapp,'cron', hour='*/10') 
+    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+    try:
+        scheduler.start()
+    except (KeyboardInterrupt, SystemExit):
+        scheduler.shutdown()    
 
 
 
