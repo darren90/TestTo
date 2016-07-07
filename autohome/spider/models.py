@@ -92,7 +92,7 @@ class User(object):
         rows = cursor.fetchall()
         # 判断是否已经储存过
         if len(rows) != 0:
-            print '---YES--这个内容已经爬取--'
+            # print '---YES--这个内容已经爬取--'
             return
         sql = "INSERT into CalBeatiful (title,detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url) values (%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql,(self.title,self.detail_url,self.icon_url,self.bbs_id,self.bbs_name,self.sub_title,self.bbs_url))

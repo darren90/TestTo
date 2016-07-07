@@ -25,6 +25,7 @@ class Spiderdb(object):
         self.md5 = md5
         self.content = content
 
+
     @staticmethod
     def saveSpider(url,content):
         md5_ = hashlib.md5(content.encode('utf-8')).hexdigest()

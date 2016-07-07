@@ -119,15 +119,15 @@ def runapp():
 
 # 配置爬虫，每10个小时爬一次
 if __name__ == '__main__':
-    runapp()
-    # scheduler = BlockingScheduler()
-    # # scheduler.add_job(runapp,'cron', second='*/12', hour='*')
-    # scheduler.add_job(runapp,'cron', hour='*/6')
-    # print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
-    # try:
-    #     scheduler.start()
-    # except (KeyboardInterrupt, SystemExit):
-    #     scheduler.shutdown()
+    # runapp()
+    scheduler = BlockingScheduler()
+    # scheduler.add_job(runapp,'cron', second='*/12', hour='*')
+    scheduler.add_job(runapp,'cron', hour='*/6')
+    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+    try:
+        scheduler.start()
+    except (KeyboardInterrupt, SystemExit):
+        scheduler.shutdown()
 
 
 
