@@ -122,7 +122,7 @@ if __name__ == '__main__':
     # runapp()
     scheduler = BlockingScheduler()
     # scheduler.add_job(runapp,'cron', second='*/12', hour='*') 
-    scheduler.add_job(runapp,'cron', hour='*/1') 
+    scheduler.add_job(runapp,'cron', hour='*/6')
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
     try:
         scheduler.start()
