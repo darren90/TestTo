@@ -27,9 +27,7 @@ class Spiderdb(object):
 
     @staticmethod
     def saveSpider(url,content):
-        m = hashlib.md5()
-        m.update(content)
-        md5_ = m.hexdigest()
+        md5_ = hashlib.md5(content.encode('utf-8')).hexdigest()
 
         conn = get_conn()
         cursor = conn.cursor()
@@ -43,23 +41,8 @@ class Spiderdb(object):
     # 终极检验，url+md5
     @staticmethod
     def isThisHadSpider(url,content):
-        m = hashlib.md5()
-        # m.update(content)
-        # print content
-
-        start = 0
-        end = 1024
-        while True:
-            data = content[start:end]
-            start = start + 1024
-            end = end + 1024
-            if end > len(content):
-                end = len(content) - start
-                break
-            m.update(data)
-
-        md5 = m.hexdigest()
-        print 'url2:%s,md5,,%s' % (url, md5)
+        md5 = hashlib.md5(content.encode('utf-8')).hexdigest()
+        # print 'url:%s,md5,,%s' % (url, md5)
 
         conn = get_conn()
         cursor = conn.cursor()
@@ -105,6 +88,13 @@ class User(object):
     def save(self):
         conn = get_conn()
         cursor = conn.cursor()
+        sql_sel = "select * from CalBeatiful where title = \'%s\' and detail_url = \'%s\' ;" % (self.title,self.detail_url)
+        cursor.execute(sql_sel)
+        rows = cursor.fetchall()
+        # 判断是否已经储存过
+        if len(rows) != 0:
+            print '---YES--这个内容已经爬取--'
+            return
         sql = "INSERT into CalBeatiful (title,detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url) values (%s,%s,%s,%s,%s,%s,%s)"
         cursor.execute(sql,(self.title,self.detail_url,self.icon_url,self.bbs_id,self.bbs_name,self.sub_title,self.bbs_url))
         conn.commit()

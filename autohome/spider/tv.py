@@ -25,10 +25,8 @@ class spider(object):
 #getsource用来获取网页源代码
     def getsource(self,url):
         response = requests.get(url)
-        print 'jeixi'
         # response.encoding = 'gb2312'
-        md5 = hashlib.md5(url).hexdigest()
-        print 'url1:%s,md5,,%s' % (url, md5)
+        md5 = hashlib.md5(response.text.encode('utf-8')).hexdigest()
         return response.text
 
 #changepage用来生产不同页数的链接
@@ -121,15 +119,15 @@ def runapp():
 
 # 配置爬虫，每10个小时爬一次
 if __name__ == '__main__':
-    runapp()
-    # scheduler = BlockingScheduler()
-    # # scheduler.add_job(runapp,'cron', second='*/12', hour='*') 
-    # scheduler.add_job(runapp,'cron',second='*/3', hour='*') 
-    # print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
-    # try:
-    #     scheduler.start()
-    # except (KeyboardInterrupt, SystemExit):
-    #     scheduler.shutdown()    
+    # runapp()
+    scheduler = BlockingScheduler()
+    # scheduler.add_job(runapp,'cron', second='*/12', hour='*') 
+    scheduler.add_job(runapp,'cron', hour='*/1') 
+    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+    try:
+        scheduler.start()
+    except (KeyboardInterrupt, SystemExit):
+        scheduler.shutdown()    
 
 
 
