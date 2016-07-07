@@ -16,3 +16,9 @@ def deploy():
         run('git pull')
         sudo('supervisorctl restart autohome')
         sudo('supervisorctl status')
+
+
+def schedu():
+    with cd('/home/tengfei/TestTo/autohome/spider'):
+        run('phython tv.py &')
+
