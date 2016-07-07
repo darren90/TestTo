@@ -20,9 +20,3 @@ CREATE TABLE `spiderdb` (
   `md5` varchar(450) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
-
-
-ALTER TABLE `fei`.`spiderdb`
-ADD COLUMN `stype` VARCHAR(45) NULL AFTER `md5`;
-
-update fei.spiderdb set stype = 'carCalBeatiful'

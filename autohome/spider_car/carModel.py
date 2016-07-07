@@ -31,7 +31,8 @@ class Spiderdb(object):
 
         conn = get_conn()
         cursor = conn.cursor()
-        sql = "INSERT into spiderdb (url,md5,stype) values (\'%s\' ,\'%s\' ,\'%s\')" % (url,md5_,'carCalBeatiful')
+        sql = "INSERT into spiderdb (url,md5,stype) values (\'%s\' ,\'%s\' ,\'%s\')" % (url,url,'carCalBeatiful')
+
         cursor.execute(sql)
         conn.commit()
         cursor.close()

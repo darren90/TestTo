@@ -4,8 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import urlparse
-from models import User
-from models import Spiderdb
+from carModel import *
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
@@ -48,7 +47,7 @@ class spider(object):
 
     # 都不为空的时候，存储爬取的链接
      isHadSpider = Spiderdb.isThisHadSpider(url,html_countent)
-     # print '---url:%s,hadSpider:%d'%(url,isHadSpider)
+     print '---url:%s,hadSpider:%d'%(url,isHadSpider)
      if isHadSpider == True:
          print '地址：%s 已经爬取，并且内容没有更新'%url
          return
