@@ -1,11 +1,15 @@
 #-*- coding: UTF-8 -*-
 from  flask import Flask,render_template,request,jsonify
-from models import  *
+from models import *
+# from CarModel
+
+
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return  render_template("index.html")
+
+# @app.route('/')
+# def index():
+#     return  render_template("index_1.html")
 
 @app.route('/test')
 def test():
@@ -19,6 +23,12 @@ def test():
 #     user = User(id,content)
 #     user.save()
 #     return jsonify(status="success")
+
+
+@app.route('/')
+def index():
+    return  render_template("index_1.html")
+
 
 @app.route('/delte/<string:todo_id>')
 def delete(todo_id):
@@ -51,6 +61,26 @@ def bbsname_search(keyword):
     carbs = CalBeatiful.bbsname_search(keyword)
     return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
 
+
+
+#
+#  汽车测评视频的搜索
+#
+@app.route('/car/query/<page>/<count>')
+def query_carvideo(page,count):
+    carvs = CarVideos.query(page,count)
+    return  jsonify(status="success",users=[carv.to_json() for carv in carvs])
+
+#搜索 - 标题
+@app.route('/car/carname/search/<keyword>/')
+def car_name_search(keyword):
+    carvs = CarVideos.car_name_search(keyword)
+    return  jsonify(status="success",users=[carv.to_json() for carv in carvs])
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return  jsonify(status='error')#render_template('404.html')
 
 if __name__ == '__main__':
     app.run()

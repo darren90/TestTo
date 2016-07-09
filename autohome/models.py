@@ -1,3 +1,5 @@
+#-*- coding: UTF-8 -*-
+
 # from app import db
 import  MySQLdb
 
@@ -79,16 +81,6 @@ class CalBeatiful(object):
         self.bbs_name = bbs_name
         self.sub_title = sub_title
         self.bbs_url = bbs_url
-
-
-    # def getCarbs(rows):
-    #     carbs = []
-    #     for row in rows:
-    #         carb = CalBeatiful(row[0], row[1],row[2], row[3],row[4], row[5],row[6])
-    #         carbs.append(carb)
-    #     return carbs
-
-
 
     def save(self):
         conn = get_conn()
@@ -178,6 +170,74 @@ class CalBeatiful(object):
             'bbs_url':self.bbs_url
         }
 
+# 搜索视频
+class CarVideos(object):
+    def __init__(self,car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url):
+        self.car_name = car_name
+        self.car_level = car_level
+        self.car_video_url = car_video_url
+        self.video_title = video_title
+        self.video_imgurl = video_imgurl
+        self.video_timel = video_timel
+        self.video_play_url = video_play_url
+
+    @staticmethod
+    def query_all():
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "SELECT car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url from car_videos"
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        carcideos = []
+        for row in rows:
+            carvideo = CarVideos(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+            carcideos.append(carvideo)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return carcideos
+
+    @staticmethod
+    def query(page, count):
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "SELECT car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url from car_videos LIMIT %s,%s" % (page, count)
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        carvideos = []
+        for row in rows:
+            carvideo = CarVideos(row[0], row[1],row[2], row[3],row[4], row[5],row[6])
+            carvideos.append(carvideo)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return carvideos
+
+    @staticmethod
+    def car_name_search(keyword):
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "SELECT car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url from car_videos where car_name like \'%%%s%%\' " % (keyword)
+
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        carvideos = []
+        for row in rows:
+            carvideo = CarVideos(row[0], row[1],row[2], row[3],row[4], row[5],row[6])
+            carvideos.append(carvideo)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return carvideos
 
 
+    def to_json(self):
+        return {
+            'car_name':self.car_name,
+            'car_video_url':self.car_video_url,
+            'video_title':self.video_title,
+            'video_imgurl':self.video_imgurl,
+            'video_timel':self.video_timel,
+            'video_play_url':self.video_play_url
+        }
 
