@@ -217,7 +217,7 @@ class CarVideos(object):
     def car_name_search(keyword):
         conn = get_conn()
         cursor = conn.cursor()
-        sql = "SELECT car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url from car_videos where car_name like \'%%%s%%\' " % (keyword)
+        sql = "SELECT car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url from car_videos where video_play_url !='' and car_name like \'%%%s%%\' " % (keyword)
 
         cursor.execute(sql)
         rows = cursor.fetchall()
