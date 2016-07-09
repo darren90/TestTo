@@ -3,6 +3,9 @@
 import  MySQLdb
 import hashlib
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def get_conn():
     host = "127.0.0.1"
@@ -25,14 +28,48 @@ class Spiderdb(object):
         self.md5 = md5
         self.content = content
 
-
+    # 抓取 品牌
     @staticmethod
-    def saveSpider(url,content):
+    def save_sbrand(url,content):
         md5_ = hashlib.md5(content.encode('utf-8')).hexdigest()
 
         conn = get_conn()
         cursor = conn.cursor()
-        sql = "INSERT into spiderdb (url,md5,stype) values (\'%s\' ,\'%s\' ,\'%s\')" % (url,url,'carCalBeatiful')
+        sql = "INSERT into spiderdb (url,md5,stype) values (\'%s\' ,\'%s\' ,\'%s\')" % (url,md5_,'sbrand')
+
+        cursor.execute(sql)
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+    #  是否品牌页面已经抓取了
+    @staticmethod
+    def is_sbrand_HadSpider(url,content):
+        md5 = hashlib.md5(content.encode('utf-8')).hexdigest()
+
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "select * from spiderdb where stype = 'sbrand' and ( url = \'%s\' or md5 = \'%s\');" % (url,md5)
+
+        cursor.execute(sql)
+        rows = cursor.fetchall()
+        # print '--11--'
+        # print rows
+        result = False
+        if len(rows) != 0:
+            result = True
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return result
+
+    @staticmethod
+    def save_carvideo_spider(url,content):
+        md5_ = hashlib.md5(content.encode('utf-8')).hexdigest()
+
+        conn = get_conn()
+        cursor = conn.cursor()
+        sql = "INSERT into spiderdb (url,md5,stype) values (\'%s\' ,\'%s\' ,\'%s\')" % (url,md5_,'carvideo')
 
         cursor.execute(sql)
         conn.commit()
@@ -41,9 +78,8 @@ class Spiderdb(object):
 
     # 终极检验，url+md5
     @staticmethod
-    def isThisHadSpider(url,content):
+    def is_carvideo_HadSpider(url,content):
         md5 = hashlib.md5(content.encode('utf-8')).hexdigest()
-        # print 'url:%s,md5,,%s' % (url, md5)
 
         conn = get_conn()
         cursor = conn.cursor()
@@ -58,65 +94,61 @@ class Spiderdb(object):
         conn.close()
         return result  
 
-    @staticmethod
-    def query_all():
-        conn = get_conn()
-        cursor = conn.cursor()
-        sql = "SELECT * from spiderdb"
-        cursor.execute(sql)
-        rows = cursor.fetchall()
-        spiderdbs = []
-        for row in rows:
-            spiderdb = Spiderdb(row[0],row[1])
-            spiderdbs.append(spiderdb)
-        conn.commit()
-        cursor.close()
-        conn.close()
-        return spiderdbs        
-       
-
-# CalBeatiful
-class User(object):
-    def __init__(self,title,detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url):
-        self.title = title
-        self.detail_url = detail_url
-        self.icon_url = icon_url
-        self.bbs_id = bbs_id
-        self.bbs_name = bbs_name
-        self.sub_title = sub_title
-        self.bbs_url = bbs_url
+# Auto_Brand
+class Auto_Brand(object):
+    def __init__(self,brand_name,brand_url,brand_imgurl,sbrand_name,car_name,car_url):
+        self.brand_name = brand_name
+        self.brand_url = brand_url
+        self.brand_imgurl = brand_imgurl
+        self.sbrand_name = sbrand_name
+        self.car_name = car_name
+        self.car_url = car_url
 
     def save(self):
         conn = get_conn()
         cursor = conn.cursor()
-        sql_sel = "select * from CalBeatiful where title = \'%s\' and detail_url = \'%s\' ;" % (self.title,self.detail_url)
+        sql_sel = "select * from auto_brand where sbrand_name = \'%s\' and car_name = \'%s\' ;" % (self.sbrand_name,self.car_name)
         cursor.execute(sql_sel)
         rows = cursor.fetchall()
         # 判断是否已经储存过
         if len(rows) != 0:
             print '---YES--这个内容已经爬取--'
             return
-        sql = "INSERT into CalBeatiful (title,detail_url,icon_url,bbs_id,bbs_name,sub_title,bbs_url) values (%s,%s,%s,%s,%s,%s,%s)"
-        cursor.execute(sql,(self.title,self.detail_url,self.icon_url,self.bbs_id,self.bbs_name,self.sub_title,self.bbs_url))
+        sql = "INSERT into auto_brand (brand_name,brand_url,brand_imgurl,sbrand_name,car_name,car_url) values (%s,%s,%s,%s,%s,%s)"
+        cursor.execute(sql,(self.brand_name,self.brand_url,self.brand_imgurl,self.sbrand_name,self.car_name,self.car_url))
         conn.commit()
         cursor.close()
         conn.close()
 
-    @staticmethod
-    def query_all():
+# car_videos
+class Car_Videos(object):
+    def __init__(self, car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url):
+        self.car_name = car_name
+        self.car_level = car_level
+        self.car_video_url = car_video_url
+        self.video_title = video_title
+        self.video_imgurl = video_imgurl
+        self.video_timel = video_timel
+        self.video_play_url = video_play_url
+
+    def save(self):
         conn = get_conn()
         cursor = conn.cursor()
-        sql = "SELECT * from CalBeatiful"
-        cursor.execute(sql)
+        # print '----777--:%s'%self.video_play_url
+        sql_sel = "select * from car_videos where car_name = \'%s\' and video_play_url = \'%s\' ;" % (self.car_name, self.video_play_url)
+        # print sql_sel
+        cursor.execute(sql_sel)
         rows = cursor.fetchall()
-        users = []
-        for row in rows:
-            user = User(row[0],row[1])
-            users.append(user)
+        # 判断是否已经储存过
+        if len(rows) != 0:
+            print '---YES--这个内容已经爬取--'
+            return
+        sql = "INSERT into car_videos (car_name, car_level, car_video_url, video_title, video_imgurl, video_timel,video_play_url) values (%s,%s,%s,%s,%s,%s,%s)"
+        cursor.execute(sql, (
+        self.car_name, self.car_level, self.car_video_url, self.video_title, self.video_imgurl, self.video_timel,self.video_play_url))
         conn.commit()
         cursor.close()
         conn.close()
-        return users
 
     def __str__(self):
-        return "id:{}-name:{}".format(self.title,self.detail_url)
+        return "id:{}-name:{}".format(self.car_name,self.video_play_url)
