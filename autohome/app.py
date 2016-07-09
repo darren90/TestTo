@@ -29,7 +29,7 @@ def update():
     pass
 
 
-@app.route('/list')
+@app.route('/all')
 def list():
     carbs = CalBeatiful.query_all()
     return  jsonify(status="success",users=[carb.to_json() for carb in carbs])

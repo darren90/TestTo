@@ -94,6 +94,8 @@ class spider(object):
        #  直接开始解析视频
         if car_videl_url is None or len(car_videl_url) == 0:
             # 直接在这里进行一遍存储
+            car_videos = Car_Videos(car_name,car_level,car_videl_url,'','','','')
+            car_videos.save()
             return
 
         #  再次解析网页 最后的视频网页
@@ -103,14 +105,14 @@ class spider(object):
             return
 
         # 都不为空的时候，存储爬取的链接
-        # isvideoHadSpider = Spiderdb.is_carvideo_HadSpider(car_videl_url,html_content_c)
-        # print '---url:%s,hadSpider:%d'%(car_videl_url,isvideoHadSpider)
-        # if isvideoHadSpider == True:
-        #     print '视频,地址：%s 已经爬取，并且内容没有更新'%car_videl_url
-        #     return []
-        # else:
-        #     print '视频,地址：%s 没有爬取' % car_videl_url
-        #     Spiderdb.save_carvideo_spider(car_videl_url,html_content_c)
+        isvideoHadSpider = Spiderdb.is_carvideo_HadSpider(car_videl_url,html_content_c)
+        print '---url:%s,hadSpider:%d'%(car_videl_url,isvideoHadSpider)
+        if isvideoHadSpider == True:
+            print '视频,地址：%s 已经爬取，并且内容没有更新'%car_videl_url
+            return []
+        else:
+            print '视频,地址：%s 没有爬取' % car_videl_url
+            Spiderdb.save_carvideo_spider(car_videl_url,html_content_c)
 
         soup = BeautifulSoup(html_content_c, "html.parser", from_encoding='gb2312')
 
@@ -132,15 +134,15 @@ class spider(object):
     #解析品牌数据
     def parse_html_brand(self,html_countent,url):
 
-    # # 都不为空的时候，存储爬取的链接
-    #  isHadSpider = Spiderdb.is_sbrand_HadSpider(url,html_countent)
-    #  print '---url:%s,hadSpider:%d'%(url,isHadSpider)
-    #  if isHadSpider == True:
-    #      print '大类,地址：%s 已经爬取，并且内容没有更新'%url
-    #      return []
-    #  else:
-    #     print '大类,地址：%s 没有爬取' % url
-    #     Spiderdb.save_sbrand(url,html_countent)
+    # 都不为空的时候，存储爬取的链接
+     isHadSpider = Spiderdb.is_sbrand_HadSpider(url,html_countent)
+     print '---url:%s,hadSpider:%d'%(url,isHadSpider)
+     if isHadSpider == True:
+         print '大类,地址：%s 已经爬取，并且内容没有更新'%url
+         return []
+     else:
+        print '大类,地址：%s 没有爬取' % url
+        Spiderdb.save_sbrand(url,html_countent)
         
      soup = BeautifulSoup(html_countent, "html.parser",from_encoding='gb2312')
      all_dls = soup.find_all('dl')
@@ -188,8 +190,8 @@ class spider(object):
                 # 车的主页
                 car_url = car_model.find('h4').find('a')['href']
                 print '%s-%s-%s'%(sbrand_name,car_name,car_url)
-                # autobrand = Auto_Brand(brand_name,brand_url,brand_imgurl,sbrand_name,car_name,car_url)
-                # autobrand.save()
+                autobrand = Auto_Brand(brand_name,brand_url,brand_imgurl,sbrand_name,car_name,car_url)
+                autobrand.save()
                 car_dict['car_name'] = car_name
                 car_dict['car_url'] = car_url
                 car_array.append(car_dict)
@@ -202,7 +204,7 @@ def runapp():
     print('Tick1! The time is: %s' % datetime.now())
     count = 1
     mySpider = spider()
-    all_pages = ['http://www.autohome.com.cn/grade/carhtml/B.html']#mySpider.get_scraw_urls()
+    all_pages = mySpider.get_scraw_urls()
     for link in all_pages:
         print '-%d-%s'%(count,link)
         html = mySpider.getsource(link)
