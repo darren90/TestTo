@@ -1,54 +1,39 @@
+
 {% extends "base.html" %}
 {% block content %}
-    <form class="input-group" action="/add" method="post">
-        {{ form.hidden_tag() }}
-        {{ form.content(class="form-control") }}
+    <form class="input-group" action="/search_video" method="post">
+         <input class="form-control" id="content" name = "content" type = "text" value="">
     <span class="input-group-btn">
-        <button class="btn btn-default" type="submit">Add</button>
+        <button class="btn btn-default" type="submit">Search</button>
     </span>
     </form>
-    {% for error in form.errors.content %}
-        <div>{{ error }}</div>
-    {% endfor %}
+
     <div>
-        <h2>Todo List</h2>
-        {% if todos %}
+        <h2>测评视频列表</h2>
+        {% if videos %}
             <table class="table">
                 <thead>
                     <tr>
-                        <th>content</th>
-                        <th>status</th>
-                        <th>time</th>
-                        <th>operate</th>
+                        <th>videoTitle</th>
+                        <th>Play_url</th>
+                        <th>Time</th>
+                        <th>Level</th>
                     </tr>
                 </thead>
                 <tbody>
-                   {% for todo in todos %}
+                   {% for video in videos %}
                         <tr>
-                            <td>{{ todo.content }}</td>
-                            <td>
-                                {% if todo.status == 1 %}
-                                已完成
-                                {% else %}
-                                未完成
-                                {% endif %}
-                            </td>
-                            <td>{{ todo.time.strftime('%H:%M %d-%m-%Y') }}</td>
-                            {% if todo.status == 1 %}
-                                <td><a href="/undone/{{ todo.id }}" class="btn btn-primary">Undone</a></td>
-                            {% else %}
-                                <td><a href="/done/{{ todo.id }}" class="btn btn-primary">Done</a></td>
-                            {% endif %}
-                            <td><a href="/delete/{{ todo.id }}" class="btn btn-danger">Delete</a></td>
-
+                            <td>{{ video.video_title }}</td>
+                            <td><a href="{{ video.video_play_url }}">{{ video.video_play_url }}</a></td>
+                            <td>{{ video.video_timel }} </td>
+                            <td>{{ video.car_level }}</td>
                         </tr>
                    {% endfor %}
                 </tbody>
             </table>
     {% else %}
-            <h3 class="text-info">No todos,please add</h3>
+            <h3 class="text-info">No Video,please Search</h3>
     {% endif %}
-
     </div>
 {% endblock %}
 

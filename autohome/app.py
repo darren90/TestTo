@@ -1,11 +1,11 @@
 #-*- coding: UTF-8 -*-
-from  flask import Flask,render_template,request,jsonify
+from  flask import Flask,flash,render_template,request,jsonify,abort
 from models import *
 # from CarModel
 
 
 app = Flask(__name__)
-
+app.secret_key = 'dafeige'
 
 # @app.route('/')
 # def index():
@@ -28,6 +28,10 @@ def test():
 @app.route('/')
 def index():
     return  render_template("index_1.html")
+
+@app.route('/video')
+def video_index():
+    return  render_template("index.html")
 
 
 @app.route('/delte/<string:todo_id>')
@@ -62,7 +66,6 @@ def bbsname_search(keyword):
     return  jsonify(status="success",users=[carb.to_json() for carb in carbs])
 
 
-
 #
 #  汽车测评视频的搜索
 #
@@ -77,6 +80,20 @@ def car_name_search(keyword):
     carvs = CarVideos.car_name_search(keyword)
     return  jsonify(status="success",users=[carv.to_json() for carv in carvs])
 
+# 网页展示
+@app.route('/search_video', methods=['POST'])
+def search_video__():
+    form = request.form
+    keyword = form.get('content')
+    if not keyword:
+        abort(404)
+    # if form.validate():
+    #     content = form.content.data
+    #     todo = Todo(content=content,time=datetime.now())
+    #     todo.save()
+    # todos = Todo.objects.order_by('-time')
+    carvs = CarVideos.car_name_search(keyword)
+    return render_template("index.html",videos=carvs)
 
 @app.errorhandler(404)
 def not_found(error):
