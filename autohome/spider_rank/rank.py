@@ -5,6 +5,8 @@ import requests
 import re
 import urlparse
 
+from rankModel import  *
+
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
@@ -43,7 +45,7 @@ class spider(object):
         return pages_arary
 
     # 解析具体的数据
-    def parse_html_content(self, url):
+    def parse_html_content(self, url,rank_year):
         html_countent = self.getsource(url)
 
         # # 都不为空的时候，存储爬取的链接
@@ -59,63 +61,46 @@ class spider(object):
         res_array = []
         res_data = {}
         soup = BeautifulSoup(html_countent, "html.parser", from_encoding='gb2312')
-        body = soup.find('tbody')#find('table',class_="rankingtable dataTable")
+        #  2015 的世界数据抓取
+        # body = soup.find('tbody')#find('table',class_="rankingtable dataTable")
+
+        body = soup.find('table', class_='rankingtable')
         # print body
 
         if body is None:
             return []
-
+        count = 0
         print len(body.findAll('tr'))
         for trs in body.findAll('tr'):
+            # print trs
+            if count == 0:
+                count = count + 1
+                continue
+
             tds = trs.findAll('td')
             # print len(tds)
-
-            print tds[0].get_text()
-            print tds[1].get_text()
-            print tds[2].find('a').get_text()
-            com_url = tds[2].find('a')['href']
-            com_url = urlparse.urljoin(url,com_url)
-            print com_url
-            print tds[3].get_text().replace(",","")
-            print tds[4].get_text().replace(",","")
-            print tds[5].get_text()
-            print '---='
+            # rank_year, rank, last_rank,co_name,co_detailurl,  income, profit, nation
+            rank = tds[0].get_text()
+            last_rank = tds[1].get_text()
+            co_name = tds[2].find('a').get_text().replace("'", "''")
+            co_detailurl = tds[2].find('a')['href']
+            co_detailurl = urlparse.urljoin(url,co_detailurl)
+            income = tds[3].get_text().replace(",","")
+            profit = tds[4].get_text().replace(",","")
+            nation = tds[5].get_text()
 
 
-            # 帖子的详情地址
-            # detail_url = new_link['href']
-            #
-            # # 帖子的标题
-            # title = new_link['title']
-            #
-            # # 图片地址
-            # icon_url = new_link.find('img')['src']
-            #
-            # # 副标题
-            # sub_title = link.find('span').get_text()
-            #
-            # # 发帖人id
-            # bbs_id = link.find('dt').find('a').get_text()
-            #
-            # bbs__ = link.find('dd', class_="font12NoLine").find('a')
-            #
-            # # 文章所在的论坛名字
-            # bbs_name = bbs__.get_text()
-            #
-            # # 文章所在轮胎的地址
-            # bbs_url = urlparse.urljoin("http://club.autohome.com.cn", bbs__['href'])
-            #
-            # user = User(title, detail_url, icon_url, bbs_id, bbs_name, sub_title, bbs_url)
-            # user.save()
+            rand_word = Rank_Word(rank_year, rank, last_rank,co_name,co_detailurl,  income, profit, nation)
+            rand_word.save()
 
 
 def runapp():
     print('Tick1! The time is: %s' % datetime.now())
     fialCount = 1
     count = 1
-    url = 'http://www.fortunechina.com/fortune500/c/2015-07/22/content_244435.htm'
+    url = 'http://www.fortunechina.com/fortune500/c/2014-07/07/content_212535.htm'
     mySpider = spider()
-    mySpider.parse_html_content(url)
+    mySpider.parse_html_content(url,'2014')
     # all_pages = mySpider.changepage(url, 20)
     # # all_links = mySpider.getAllLines(all_pages)
     # for link in all_pages:

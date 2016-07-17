@@ -15,7 +15,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/TODO-orm$app.coverage" NAME="app Coverage Results" MODIFIED="1467654469380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/autohome$rank.coverage" NAME="rank Coverage Results" MODIFIED="1468731382876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/spider_rank" />
+    <SUITE FILE_PATH="coverage/autohome$rank.coverage" NAME="rank Coverage Results" MODIFIED="1468767862329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/spider_rank" />
     <SUITE FILE_PATH="coverage/autohome$app.coverage" NAME="app Coverage Results" MODIFIED="1468060489078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TODO$run.coverage" NAME="run Coverage Results" MODIFIED="1467479451282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TODO2$app.coverage" NAME="app Coverage Results" MODIFIED="1467525176087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -35,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rank.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rank.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spider_rank/rank.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
+            <state relative-caret-position="410">
+              <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
               <folding>
                 <element signature="e#25#54#0" expanded="true" />
               </folding>
@@ -50,7 +50,7 @@
       <file leaf-file-name="TestCar.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spider_rank/TestCar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
+            <state relative-caret-position="204">
               <caret line="12" column="77" selection-start-line="12" selection-start-column="77" selection-end-line="12" selection-end-column="77" />
               <folding>
                 <marker date="1468731845000" expanded="true" signature="216:294" ph="create table... user" />
@@ -61,23 +61,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rankModel.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rankModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spider_rank/rankModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1173">
-              <caret line="18" column="246" selection-start-line="18" selection-start-column="95" selection-end-line="18" selection-end-column="246" />
+            <state relative-caret-position="208">
+              <caret line="136" column="8" selection-start-line="136" selection-start-column="8" selection-end-line="136" selection-end-column="8" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
-                <marker date="1468731918000" expanded="true" signature="307:534" ph="create table... user" />
-                <marker date="1468731918000" expanded="true" signature="945:1013" ph="INSERT into spiderdb... " />
-                <marker date="1468731918000" expanded="true" signature="1348:1429" ph="select * fro... spiderdb" />
-                <marker date="1468731918000" expanded="true" signature="1915:1983" ph="INSERT into spiderdb... " />
-                <marker date="1468731918000" expanded="true" signature="2322:2379" ph="select * fro... spiderdb" />
-                <marker date="1468731918000" expanded="true" signature="3062:3135" ph="select * fro... auto_brand" />
-                <marker date="1468731918000" expanded="true" signature="3359:3473" ph="INSERT into auto_brand... " />
-                <marker date="1468731918000" expanded="true" signature="4241:4317" ph="select * fro... car_videos" />
-                <marker date="1468731918000" expanded="true" signature="4569:4713" ph="INSERT into car_videos... " />
+                <marker date="1468733939000" expanded="true" signature="307:560" ph="create table... user" />
+                <marker date="1468733939000" expanded="true" signature="971:1039" ph="INSERT into spiderdb... " />
+                <marker date="1468733939000" expanded="true" signature="1374:1455" ph="select * fro... spiderdb" />
+                <marker date="1468733939000" expanded="true" signature="1941:2009" ph="INSERT into spiderdb... " />
+                <marker date="1468733939000" expanded="true" signature="2348:2405" ph="select * fro... spiderdb" />
+                <marker date="1468733939000" expanded="true" signature="3088:3161" ph="select * fro... auto_brand" />
+                <marker date="1468733939000" expanded="true" signature="3385:3499" ph="INSERT into auto_brand... " />
+                <marker date="1468733939000" expanded="true" signature="4187:4235" ph="select * fro... car_videos" />
+                <marker date="1468733939000" expanded="true" signature="4480:4632" ph="INSERT into rank_word... " />
+                <marker date="1468733939000" expanded="true" signature="4480:4639" ph="INSERT into rank_word... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createSql.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spider/createSql.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -143,9 +154,9 @@
         <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/404.html" />
-        <option value="$PROJECT_DIR$/spider_rank/rank.py" />
         <option value="$PROJECT_DIR$/spider_rank/TestCar.py" />
         <option value="$PROJECT_DIR$/spider_rank/rankModel.py" />
+        <option value="$PROJECT_DIR$/spider_rank/rank.py" />
       </list>
     </option>
   </component>
@@ -156,8 +167,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="471" />
-    <option name="y" value="23" />
+    <option name="x" value="517" />
+    <option name="y" value="48" />
     <option name="width" value="1440" />
     <option name="height" value="1019" />
   </component>
@@ -584,8 +595,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="471" y="23" width="1440" height="1019" extended-state="0" />
-    <editor active="true" />
+    <frame x="517" y="48" width="1440" height="1019" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20529328" sideWeight="0.4927235" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -593,7 +604,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2966559" sideWeight="0.9081886" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2966559" sideWeight="0.9081886" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23941799" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20243205" sideWeight="0.50727654" order="2" side_tool="true" content_ui="tabs" />
@@ -724,13 +735,6 @@
     <entry file="file://$PROJECT_DIR$/spider/schedule.py" />
     <entry file="file://$PROJECT_DIR$/spider_car/tv.py" />
     <entry file="file://$PROJECT_DIR$/spider_car/models.py" />
-    <entry file="file://$PROJECT_DIR$/spider/createSql.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spider/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
@@ -882,19 +886,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spider_rank/rank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
-          <folding>
-            <element signature="e#25#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spider_rank/TestCar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="204">
           <caret line="12" column="77" selection-start-line="12" selection-start-column="77" selection-end-line="12" selection-end-column="77" />
           <folding>
             <marker date="1468731845000" expanded="true" signature="216:294" ph="create table... user" />
@@ -904,21 +898,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/spider/createSql.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spider_rank/rankModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1173">
-          <caret line="18" column="246" selection-start-line="18" selection-start-column="95" selection-end-line="18" selection-end-column="246" />
+        <state relative-caret-position="208">
+          <caret line="136" column="8" selection-start-line="136" selection-start-column="8" selection-end-line="136" selection-end-column="8" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
-            <marker date="1468731918000" expanded="true" signature="307:534" ph="create table... user" />
-            <marker date="1468731918000" expanded="true" signature="945:1013" ph="INSERT into spiderdb... " />
-            <marker date="1468731918000" expanded="true" signature="1348:1429" ph="select * fro... spiderdb" />
-            <marker date="1468731918000" expanded="true" signature="1915:1983" ph="INSERT into spiderdb... " />
-            <marker date="1468731918000" expanded="true" signature="2322:2379" ph="select * fro... spiderdb" />
-            <marker date="1468731918000" expanded="true" signature="3062:3135" ph="select * fro... auto_brand" />
-            <marker date="1468731918000" expanded="true" signature="3359:3473" ph="INSERT into auto_brand... " />
-            <marker date="1468731918000" expanded="true" signature="4241:4317" ph="select * fro... car_videos" />
-            <marker date="1468731918000" expanded="true" signature="4569:4713" ph="INSERT into car_videos... " />
+            <marker date="1468733939000" expanded="true" signature="307:560" ph="create table... user" />
+            <marker date="1468733939000" expanded="true" signature="971:1039" ph="INSERT into spiderdb... " />
+            <marker date="1468733939000" expanded="true" signature="1374:1455" ph="select * fro... spiderdb" />
+            <marker date="1468733939000" expanded="true" signature="1941:2009" ph="INSERT into spiderdb... " />
+            <marker date="1468733939000" expanded="true" signature="2348:2405" ph="select * fro... spiderdb" />
+            <marker date="1468733939000" expanded="true" signature="3088:3161" ph="select * fro... auto_brand" />
+            <marker date="1468733939000" expanded="true" signature="3385:3499" ph="INSERT into auto_brand... " />
+            <marker date="1468733939000" expanded="true" signature="4187:4235" ph="select * fro... car_videos" />
+            <marker date="1468733939000" expanded="true" signature="4480:4632" ph="INSERT into rank_word... " />
+            <marker date="1468733939000" expanded="true" signature="4480:4639" ph="INSERT into rank_word... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spider_rank/rank.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="87" column="54" selection-start-line="87" selection-start-column="54" selection-end-line="87" selection-end-column="54" />
+          <folding>
+            <element signature="e#25#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
