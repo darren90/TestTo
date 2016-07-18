@@ -98,9 +98,9 @@ def runapp():
     print('Tick1! The time is: %s' % datetime.now())
     fialCount = 1
     count = 1
-    url = 'http://www.fortunechina.com/fortune500/c/2014-07/07/content_212535.htm'
+    url = 'http://www.fortunechina.com/fortune500/c/2013-07/08/2013G500.htm'
     mySpider = spider()
-    mySpider.parse_html_content(url,'2014')
+    mySpider.parse_html_content(url,'2013')
     # all_pages = mySpider.changepage(url, 20)
     # # all_links = mySpider.getAllLines(all_pages)
     # for link in all_pages:
