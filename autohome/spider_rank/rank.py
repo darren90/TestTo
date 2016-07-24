@@ -17,7 +17,7 @@ import hashlib
 import sys
 
 reload(sys)
-sys.setdefaultencoding("gb2312")
+sys.setdefaultencoding("utf-8")
 
 
 class spider(object):
