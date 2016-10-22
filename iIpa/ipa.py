@@ -15,6 +15,7 @@ from datetime import date, time, datetime, timedelta
 commendPath = "/Users/" + getpass.getuser() + "/"
 commendFinderName = ".ipa_build_py"
 commendFullPath = commendPath + commendFinderName
+# print '---config:%' % commendFullPath
 configFileName = "ipaBuildPyConfigFile.json"
 commendFilePath = commendFullPath + "/" + configFileName
 
@@ -27,9 +28,9 @@ gitPath = "ssh://git@106.75.11.245:29876/data/rrmj_git/rrmjiPad.git"
 #checkout后的本地路径 /Users/Fengtf/Documents/git/iPad
 target_path = commendPath + "Documents/git/iPad"
 #主路径
-mainPath = None
+mainPath = ""
 #证书名
-certificateName = None
+certificateName = ""
 #firToken
 firToken = "09dc8056c60a0179622024dfcb00ae98"
 #邮件参数
@@ -150,17 +151,17 @@ def createFinder():
 def initJsonFile():
     fout = open(commendFilePath,'w')
     js = {}
-    js["targetName"]       = None
-    js["gitPath"]          = None
-    js["certificateName"]  = None
-    js["firToken"]         = None
-    js["emailFromUser"]    = None
-    js["emailToUser"]      = None
-    js["emailPassword"]    = None
-    js["emailHost"]        = None
-    js["tempFinder"]       = None
-    js["mainPath"]         = None
-    js["keychainPassword"] = None
+    js["targetName"]       = targetName
+    js["gitPath"]          = gitPath
+    js["certificateName"]  = certificateName
+    js["firToken"]         = firToken
+    js["emailFromUser"]    = emailFromUser
+    js["emailToUser"]      = emailToUser
+    js["emailPassword"]    = emailPassword
+    js["emailHost"]        = emailHost
+    js["tempFinder"]       = tempFinder
+    js["mainPath"]         = mainPath
+    js["keychainPassword"] = keychainPassword
     outStr = json.dumps(js,ensure_ascii = False)
     fout.write(outStr.strip().encode('utf-8') + '\n')
     fout.close()
