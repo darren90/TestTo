@@ -11,14 +11,16 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from datetime import date, time, datetime, timedelta
 
+# jenkins
+# http://www.jianshu.com/p/02e010bb2b3c
+
+# git 仓库： 用户名git  密码rrmjgit
+
 #配置文件路径
 commendPath = "/Users/" + getpass.getuser() + "/"
 commendFinderName = ".ipa_build_py"
 commendFullPath = commendPath + commendFinderName
-# print '---config:%' % commendFullPath
-configFileName = "ipaBuildPyConfigFile.json"
-commendFilePath = commendFullPath + "/" + configFileName
-
+ 
 #工程名
 targetName = "PUClient"
 #临时文件夹名称
@@ -28,9 +30,9 @@ gitPath = "ssh://git@106.75.11.245:29876/data/rrmj_git/rrmjiPad.git"
 #checkout后的本地路径 /Users/Fengtf/Documents/git/iPad
 target_path = commendPath + "Documents/git/iPad"
 #主路径
-mainPath = ""
+mainPath = "rrmjiPad/PUClient"
 #证书名
-certificateName = ""
+certificateName = "123"
 #firToken
 firToken = "09dc8056c60a0179622024dfcb00ae98"
 #邮件参数
@@ -61,36 +63,6 @@ def showParameter():
     print "emailHost                  :%s"%emailHost
     print "keychainPassword(Optional) :%s"%keychainPassword
     
-#设置参数
-def setParameter():
-    global targetName
-    global tempFinder
-    global mainPath
-    global gitPath
-    global certificateName
-    global firToken
-    global emailFromUser
-    global emailToUser
-    global emailPassword
-    global emailHost
-    global keychainPassword
-    targetName = raw_input("input targetName:")
-    if not isNone(targetName):
-        m = hashlib.md5()
-        m.update('BossZP')
-        tempFinder = m.hexdigest()
-        mainPath = commendPath + 'Documents' + '/' + tempFinder
-    gitPath = raw_input("input gitPath:")
-    certificateName = raw_input("input certificateName:")
-    firToken = raw_input("input firToken:")
-    emailFromUser = raw_input("input emailFromUser:")
-    emailToUser = raw_input("input emailToUser:")
-    emailPassword = raw_input("input emailPassword:")
-    emailHost = raw_input("input emailHost:")
-    keychainPassword = raw_input("input keychainPassword:")
-    #保存到本地
-    writeJsonFile()
-    
 #判断字符串是否为空
 def isNone(para):
     if para == None or len(para) == 0:
@@ -119,8 +91,8 @@ def setOptparse():
     global tag
     tag = options.tag
     #配置信息
-    if options.config == True and len(arguments) == 0 :
-        configMethod()
+    # if options.config == True and len(arguments) == 0 :
+    configMethod()
     #获取所有版本
     if options.showTags == True and len(arguments) == 0 :
         gitShowTags()
@@ -128,104 +100,11 @@ def setOptparse():
 #配置信息 
 def configMethod():
     os.system("clear")
-    readJsonFile()
     print "您的参数如下:"
     print "************************************"
     showParameter()
     print "************************************"
-    setParameter()
-    sys.exit()
-    
-#设置配置文件路径
-def createFinder():
-    #没有文件夹，创建文件夹
-    if not os.path.exists(commendPath + commendFinderName):
-        os.system("cd %s;mkdir %s"%(commendPath,commendFinderName))
-    #没有文件，创建文件
-    if not os.path.isfile(commendFilePath):
-        os.system("cd %s;touch %s"%(commendFullPath,configFileName))
-        initJsonFile()
-    return
-    
-#初始化json配置文件
-def initJsonFile():
-    fout = open(commendFilePath,'w')
-    js = {}
-    js["targetName"]       = targetName
-    js["gitPath"]          = gitPath
-    js["certificateName"]  = certificateName
-    js["firToken"]         = firToken
-    js["emailFromUser"]    = emailFromUser
-    js["emailToUser"]      = emailToUser
-    js["emailPassword"]    = emailPassword
-    js["emailHost"]        = emailHost
-    js["tempFinder"]       = tempFinder
-    js["mainPath"]         = mainPath
-    js["keychainPassword"] = keychainPassword
-    outStr = json.dumps(js,ensure_ascii = False)
-    fout.write(outStr.strip().encode('utf-8') + '\n')
-    fout.close()
-    
-#读取json文件
-def readJsonFile():
-    fin = open(commendFilePath,'r')
-    for eachLine in fin:
-        line = eachLine.strip().decode('utf-8')
-        line = line.strip(',')
-        js = None
-        try:
-            js = json.loads(line)
-            global targetName
-            global tempFinder
-            global mainPath
-            global gitPath
-            global certificateName
-            global firToken
-            global emailFromUser
-            global emailToUser
-            global emailPassword
-            global emailHost
-            global keychainPassword
-            targetName = js["targetName"]
-            gitPath = js["gitPath"]
-            certificateName = js["certificateName"]
-            firToken = js["firToken"]
-            emailFromUser = js["emailFromUser"]
-            emailToUser = js["emailToUser"]
-            emailPassword = js["emailPassword"]
-            emailHost = js["emailHost"]
-            tempFinder = js["tempFinder"]
-            mainPath = js["mainPath"]
-            keychainPassword = js["keychainPassword"]
-        except Exception,e:
-            print Exception
-            print e
-            continue
-    fin.close()
-    
-#写json文件
-def writeJsonFile():
-    showParameter()
-    try:
-        fout = open(commendFilePath,'w')
-        js = {}
-        js["targetName"] = targetName
-        js["gitPath"] = gitPath
-        js["certificateName"] = certificateName
-        js["firToken"] = firToken
-        js["emailFromUser"] = emailFromUser
-        js["emailToUser"] = emailToUser
-        js["emailPassword"] = emailPassword
-        js["emailHost"] = emailHost
-        js["tempFinder"] = tempFinder
-        js["mainPath"] = mainPath
-        js["keychainPassword"] = keychainPassword
-        outStr = json.dumps(js,ensure_ascii = False)
-        fout.write(outStr.strip().encode('utf-8') + '\n')
-        fout.close()
-    except Exception,e:
-        print Exception
-        print e
+    # sys.exit()
         
 #删除文件夹
 def rmoveFinder():
@@ -263,7 +142,6 @@ def gitClone():
 #显示所有版本
 def gitShowTags():
     os.system("clear")
-    readJsonFile()
     print "所有的版本"
     print mainPath
     print "************************************"
@@ -300,6 +178,7 @@ def cleanPro():
 def clearPbxproj():
     global all_the_text
     path = "%s/%s.xcodeproj/project.pbxproj"%(mainPath,targetName)
+    print '--------path:%s' % path
     file_object = open(path)
     try:
         all_the_text=file_object.readlines()
@@ -430,12 +309,9 @@ def checkWorkSpace():
 
 #主函数
 def main():
-    #设置配置文件路径
-    createFinder()
     #参数设置
     setOptparse()
     #读取json文件
-    readJsonFile()
     #是否需要设置参数
     if isNeedSetParameter():
         print "您需要设置参数,您的参数如下(使用 --config 或者 -c):"
@@ -457,14 +333,19 @@ def main():
     #clear pbxproj文件
     clearPbxproj()
     #clean工程
+    print '-----clearPbxproj-----'
     cleanPro()
     #编译
+    print '-----cleanPro-----'
     buildApp()
+    print '-----buildApp-----'
     #生成ipa文件
     cerateIPA()
+    print '-----cerateIPA-----'
     #上传到fir.im
     httpAddress = uploadToFir()
     #发邮件给测试
+    print '-----上传到fir.im-----'
     if not isNone(httpAddress):
         sendEmail(httpAddress)
     return
