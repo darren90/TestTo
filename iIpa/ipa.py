@@ -18,8 +18,6 @@ from datetime import date, time, datetime, timedelta
 
 #配置文件路径
 commendPath = "/Users/" + getpass.getuser() + "/"
-commendFinderName = ".ipa_build_py"
-commendFullPath = commendPath + commendFinderName
  
 #工程名
 targetName = "PUClient"
@@ -28,9 +26,9 @@ tempFinder = "test001"
 #git地址
 gitPath = "ssh://git@106.75.11.245:29876/data/rrmj_git/rrmjiPad.git"
 #checkout后的本地路径 /Users/Fengtf/Documents/git/iPad
-target_path = commendPath + "Documents/git/iPad"
+# target_path = commendPath + "Documents/git/iPad"
 #主路径
-mainPath = "rrmjiPad/PUClient"
+mainPath = commendPath + "github/TestTo/iIpa/rrmjiPad/PUClient"
 #证书名
 certificateName = "123"
 #firToken
@@ -204,6 +202,7 @@ def allowKeychain():
 #编译获取.app文件和dsym
 def buildApp():
     global isWorkSpace
+    print '----mainpath:%s' % mainPath
     files_list=scan_files(mainPath,postfix=".xcodeproj")
     temp = -1
     for k in range(len(files_list)):
@@ -333,7 +332,6 @@ def main():
     #clear pbxproj文件
     clearPbxproj()
     #clean工程
-    print '-----clearPbxproj-----'
     cleanPro()
     #编译
     print '-----cleanPro-----'
