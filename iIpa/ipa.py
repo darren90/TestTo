@@ -132,6 +132,7 @@ def scan_files(directory,postfix):
 def isFinderExists():
     return os.path.exists(mainPath)
 
+
 #clone工程
 def gitClone():
     os.system ('git clone %s %s --depth 1'%(gitPath,mainPath))
