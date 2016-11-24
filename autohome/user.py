@@ -41,7 +41,6 @@ def query(page,count):
     return  jsonify(status="success",users=[user.to_json() for user in users])
 
 
-
 if __name__ == '__main__':
     app.run()
     # app.run(host='0.0.0.0', port=8080)
