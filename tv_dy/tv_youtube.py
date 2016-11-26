@@ -15,7 +15,8 @@ class spider(object):
 
 #getsource用来获取网页源代码
     def getsource(self,url):
-        response = requests.get(url)
+        # response = requests.get(url)
+        response = requests.get(url, verify=False)
         response.encoding = 'gb2312'
         return response.text
 
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     fialCount = 1
     count = 1
     classinfo = []
-    url = 'https://www.youtube.com/results?q=1m'
+    url = 'http://www.youtube.com/results?q=1m'
     mySpider = spider()
     mySpider.get_content_recursion(url) #所有的页面
     fout.close()
