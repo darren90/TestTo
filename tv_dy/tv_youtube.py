@@ -59,8 +59,8 @@ if __name__ == '__main__':
     fialCount = 1
     count = 1
     classinfo = []
-    # url = 'http://www.youtube.com/results?q=1m'
-    url = 'http://www.tv.com/'
+    url = 'http://www.youtube.com/results?q=1m'
+    # url = 'http://www.tv.com/'
     mySpider = spider()
     mySpider.get_content_recursion(url) #所有的页面
     fout.close()
