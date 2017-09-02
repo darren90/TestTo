@@ -14,7 +14,7 @@ CREATE TABLE fei.`CalBeatiful` (
 
 
 
-CREATE TABLE `spiderdb` (
+CREATE TABLE fei.`spiderdb` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(450) DEFAULT NULL,
   `md5` varchar(450) DEFAULT NULL,
